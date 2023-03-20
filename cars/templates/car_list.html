@@ -4,16 +4,14 @@
 
 {% block content %}
 <h1>Car List</h1>
-  <table class="table">
+  <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">Date</th>
+        <th scope="col">VIN</th>
         <th scope="col">Year</th>
         <th scope="col">Make</th>
         <th scope="col">Model</th>
-        <th scope="col">LOT</th>
-        <th scope="col">VIN</th>
-        <th scope="col">Site</th>
+        <th scope="col">Date</th>
         <th scope="col">Status</th>
         <th scope="col">Bid</th>
         <th scope="col">Buyer Fee</th>
@@ -24,19 +22,19 @@
         <th scope="col">Transport</th>
         <th scope="col">Dismantle</th>
         <th scope="col">Weight</th>
+        <th scope="col">LOT</th>
+        <th scope="col">Site</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
       {% for car in cars %}
-      <tr>
+      <tr class="table-primary">
+        <th>{{ car.VIN }}</th>
+        <th>{{ car.year }}</th>
+        <th>{{ car.make }}</th>
+        <th>{{ car.model }}</th>
         <td>{{ car.date }}</td>
-        <td>{{ car.year }}</td>
-        <td>{{ car.make }}</td>
-        <td>{{ car.model }}</td>
-        <td>{{ car.LOT }}</td>
-        <td>{{ car.VIN }}</td>
-        <td>{{ car.site }}</td>
         <td>{{ car.status }}</td>
         <td>{{ car.bid }}</td>
         <td>{{ car.buyer_fee }}</td>
@@ -47,6 +45,8 @@
         <td>{{ car.transport }}</td>
         <td>{{ car.dismantle }}</td>
         <td>{{ car.weight }}</td>
+        <td>{{ car.LOT }}</td>
+        <td>{{ car.site }}</td>
         <td>
           <a href="{% url 'car_update' car.id %}">Edit</a>
           <form action="{% url 'car_delete' car.id %}" method="post">
