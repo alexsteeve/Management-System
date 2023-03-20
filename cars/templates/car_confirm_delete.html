@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Delete Car{% endblock %}
+
+{% block content %}
+  <h1>Confirm Delete Car</h1>
+  <p>Are you sure you want to delete the following car?</p>
+  <ul>
+    <li>Date: {{ car.date }}</li>
+    <li>Year: {{ car.year }}</li>
+    <li>Make: {{ car.make }}</li>
+    <li>Model: {{ car.model }}</li>
+    <li>LOT: {{ car.LOT }}</li>
+    <li>VIN: {{ car.VIN }}</li>
+    <li>Site: {{ car.site }}</li>
+    <li>Status: {{ car.status }}</li>
+    <li>Bid: {{ car.bid }}</li>
+    <li>Buyer Fee: {{ car.buyer_fee }}</li>
+    <li>Fixed Fee: {{ car.fixed_fee }}</li>
+    <li>Storage Fee: {{ car.storage_fee }}</li>
+    <li>Late Payment Fee: {{ car.late_payment_fee }}</li>
+    <li>Others Fees: {{ car.others_fees }}</li>
+    <li>Others Fees: {{ car.transport }}</li>
+    <li>Others Fees: {{ car.dismantle }}</li>
+    <li>Others Fees: {{ car.weight }}</li>
+  </ul>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete it</button>
+    <a href="{% url 'car_list' %}">Cancel</a>
+  </form>
+{% endblock %}
