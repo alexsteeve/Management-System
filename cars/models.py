@@ -29,7 +29,7 @@ class Car(models.Model):
     weight = models.IntegerField()
 
     def __str__(self):
-        return self.car
+        return self.VIN
 
 class Part(models.Model):
     VIN = models.ForeignKey(Car, default=1, on_delete=models.SET_DEFAULT)
