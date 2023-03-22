@@ -87,4 +87,4 @@ class Part(models.Model):
     value_paid = models.DecimalField(max_digits=10,decimal_places=2, blank=True, null=True)
 
     def __str__(self):
-       return self.part
+       return self.type

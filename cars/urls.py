@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import CarDetailView
 
 urlpatterns = [
     path('', views.car_list, name='index'),
@@ -10,4 +11,6 @@ urlpatterns = [
     path('parts/create/', views.part_create, name='part_create'),
     path('parts/update/<int:id>/', views.part_update, name='part_update'),
     path('parts/delete/<int:id>/', views.part_delete, name='part_delete'),
+    path('<int:VIN>/', views.CarDetailView.as_view(), name='car_detail'),
+    # path('<int:pk>/', views.CarDetailView.as_view(), name='car_detail'),
 ]

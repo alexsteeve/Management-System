@@ -30,7 +30,8 @@
     <tbody>
       {% for car in cars %}
       <tr class="table-primary">
-        <th>{{ car.VIN }}</th>
+        <!-- <th>{{ car.VIN }}</th> -->
+        <th><a class="nav_link" href="{% url 'car_detail' car.pk %}">{{ car.VIN }}</a></th>
         <th>{{ car.year }}</th>
         <th>{{ car.make }}</th>
         <th>{{ car.model }}</th>
