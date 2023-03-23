@@ -129,4 +129,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['alexsteeve.pythonanywhere.com']
+ALLOWED_HOSTS = ['alexsteeve.pythonanywhere.com', '127.0.0.1']
+
+STATIC_ROOT = "/home/alexsteeve/Management-System/static"
