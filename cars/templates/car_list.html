@@ -47,7 +47,7 @@
         <td>{{ car.dismantle }}</td>
         <td>{{ car.weight }}</td>
         <td>{{ car.LOT }}</td>
-        <td>{{ car.site }}</td>
+        <td><a href="{{ car.site }}">Link to the auction</a></td>
         <td>
           <a href="{% url 'car_update' car.id %}">Edit</a>
           <form action="{% url 'car_delete' car.id %}" method="post">

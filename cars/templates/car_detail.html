@@ -4,10 +4,19 @@
 
 {% block content %}
 <h3>Car detail</h3>
-<p><b>VIN:</b> {{car.VIN}}</p>
-<p><b>Year:</b> {{car.year}}</p>
-<p><b>Make:</b> {{car.make}}</p>
-<p><b>Model:</b> {{car.model}}</p>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-3">
+            <p><b>VIN:</b> {{car.VIN}}</p>
+            <p><b>Year:</b> {{car.year}}</p>
+            <p><b>Make:</b> {{car.make}}</p>
+            <p><b>Model:</b> {{car.model}}</p>
+        </div>
+        <div class="col-sm">
+            <img src="{{car.picture}}" class="img-thumbnail">
+        </div>
+            </div>
+</div>
 <h2>Part List</h2>
 <table class="table table-hover">
     <thead>
