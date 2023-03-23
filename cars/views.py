@@ -72,4 +72,5 @@ class CarDetailView(View):
         # car = get_object_or_404(Car, pk=kwargs['pk'])
         car = get_object_or_404(Car, pk=kwargs['VIN'])
         context = {'car': car}
+        context['part'] = Part.objects.filter(VIN=self.kwargs['VIN'])
         return render(request, 'car_detail.html', context)
