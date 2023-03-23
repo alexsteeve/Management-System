@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
-from .views import CarDetailView
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('', views.car_list, name='index'),
@@ -12,5 +13,5 @@ urlpatterns = [
     path('parts/update/<int:id>/', views.part_update, name='part_update'),
     path('parts/delete/<int:id>/', views.part_delete, name='part_delete'),
     path('<int:VIN>/', views.CarDetailView.as_view(), name='car_detail'),
-    # path('<int:pk>/', views.CarDetailView.as_view(), name='car_detail'),
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('jpeg/favicon.ico'))),
 ]
