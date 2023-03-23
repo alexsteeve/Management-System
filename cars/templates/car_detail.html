@@ -1,8 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title%}Car Detail{% endblock %}
+
+{% block content %}
 <h3>Car detail</h3>
-<p>VIN: {{car.VIN}}</p>
-<p>Year: {{car.year}}</p>
-<p>Make: {{car.make}}</p>
-<p>Model: {{car.model}}</p>
+<p><b>VIN:</b> {{car.VIN}}</p>
+<p><b>Year:</b> {{car.year}}</p>
+<p><b>Make:</b> {{car.make}}</p>
+<p><b>Model:</b> {{car.model}}</p>
 <h2>Part List</h2>
 <table class="table table-hover">
     <thead>
@@ -36,3 +41,4 @@
       {% endfor %}
     </tbody>
   </table>
+  {% endblock %}
