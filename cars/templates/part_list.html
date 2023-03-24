@@ -27,7 +27,7 @@
           <a href="{% url 'part_update' part.id %}">Edit</a>
           <form action="{% url 'part_delete' part.id %}" method="post">
             {% csrf_token %}
-            <button type="submit">Delete</button>
+            <!-- <button type="submit">Delete</button> -->
           </form>
         </td>
       </tr>
