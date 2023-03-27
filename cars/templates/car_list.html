@@ -7,6 +7,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th scope="col">SK number</th>
         <th scope="col">VIN</th>
         <th scope="col">Year</th>
         <th scope="col">Make</th>
@@ -31,6 +32,7 @@
       {% for car in cars %}
       <tr class="table-primary">
         <!-- <th>{{ car.VIN }}</th> -->
+        <th>{{ car.id }}</th>
         <th><a class="nav_link" href="{% url 'car_detail' car.pk %}">{{ car.VIN }}</a></th>
         <th>{{ car.year }}</th>
         <th>{{ car.make }}</th>
