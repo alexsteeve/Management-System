@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from django.views.generic.detail import View
 from django.utils import timezone
-
+from .filters import CarFilter
 from .models import Car, Part
 
 class CarForm(ModelForm):
@@ -12,7 +12,13 @@ class CarForm(ModelForm):
 
 def car_list(request):
     cars = Car.objects.all()
-    return render(request, 'car_list.html', {'cars': cars})
+
+    myFilter = CarFilter(request.GET, queryset=cars)
+    cars = myFilter.qs
+
+    context = {'cars': cars, 'myFilter': myFilter}
+
+    return render(request, 'car_list.html', context)
 
 def car_create(request):
     form = CarForm(request.POST or None)
