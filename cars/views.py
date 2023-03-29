@@ -4,6 +4,7 @@ from django.views.generic.detail import View
 from django.utils import timezone
 # from .filters import CarFilter
 from .models import Car, Part
+from django.core.paginator import Paginator
 
 class CarForm(ModelForm):
     class Meta:
@@ -12,6 +13,9 @@ class CarForm(ModelForm):
 
 def car_list(request):
     cars = Car.objects.all()
+    paginator = Paginator(cars, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     # myFilter = CarFilter(request.GET, queryset=cars)
     # cars = myFilter.qs
@@ -19,7 +23,7 @@ def car_list(request):
     # context = {'cars': cars, 'myFilter': myFilter}
     context = {'cars': cars}
 
-    return render(request, 'car_list.html', context)
+    return render(request, 'car_list.html', {'page_obj': page_obj})
 
 def car_create(request):
     form = CarForm(request.POST or None)
