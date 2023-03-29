@@ -5,6 +5,8 @@ from django.utils import timezone
 # from .filters import CarFilter
 from .models import Car, Part
 from django.core.paginator import Paginator
+from django.http import HttpResponse
+import requests
 
 class CarForm(ModelForm):
     class Meta:
