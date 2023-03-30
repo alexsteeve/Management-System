@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}VIN{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-2 bg-primary text-white text-center">
+    <h1>Vins</h1>
+</div>
+<div class="container mt-5">
+    <p>Year: {{ vins.years.0.year }}</p>
+    <p>Make: {{ vins.make.name }}</p>
+    <p>Model: {{ vins.model.name }}</p>
+</div>
+{% endblock %}

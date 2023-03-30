@@ -14,4 +14,5 @@ urlpatterns = [
     path('parts/delete/<int:id>/', views.part_delete, name='part_delete'),
     path('<int:VIN>/', views.CarDetailView.as_view(), name='car_detail'),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('jpeg/favicon.ico'))),
+    path('vin', views.vins, name='vins'),
 ]
