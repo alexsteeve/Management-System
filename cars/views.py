@@ -7,6 +7,8 @@ from .models import Car, Part
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 import requests
+from dotenv import dotenv_values
+import os
 
 class CarForm(ModelForm):
     class Meta:
@@ -87,3 +89,11 @@ class CarDetailView(View):
         context = {'car': car}
         context['part'] = Part.objects.filter(VIN=self.kwargs['VIN'])
         return render(request, 'car_detail.html', context)
+
+def vins(request):
+    response = requests.get('https://auto.dev/api/vin/1D8GT58667W612613?apikey=' + os.environ["AUTO_DEV"])
+    vins = response.json()
+    print(vins)
+
+    return render(request, "vins.html", {'vins': vins})
+    pass
