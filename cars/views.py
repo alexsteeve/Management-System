@@ -91,9 +91,8 @@ class CarDetailView(View):
         return render(request, 'car_detail.html', context)
 
 def vins(request):
-    response = requests.get('https://auto.dev/api/vin/1D8GT58667W612613?apikey=' + os.environ["AUTO_DEV"])
+    response = requests.get('https://auto.dev/api/vin/ZPBUA1ZL9KLA00848?apikey=ZrQEPSkKYWxleHN0ZWV2ZUBnbWFpbC5jb20=')
     vins = response.json()
-    print(vins)
 
     return render(request, "vins.html", {'vins': vins})
     pass
