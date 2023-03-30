@@ -91,7 +91,8 @@ class CarDetailView(View):
         return render(request, 'car_detail.html', context)
 
 def vins(request):
-    response = requests.get('https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/4JGAB54EX1A231822?format=json')
+    vinReceived = request.GET.get("vinField")
+    response = requests.get('https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/' + vinReceived + '?format=json')
     vins = response.json()
 
     return render(request, "vins.html", {'vins': vins})

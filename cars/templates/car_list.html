@@ -4,15 +4,9 @@
 
 {% block content %}
 <h1>Car List</h1>
-
-<!-- <button class="btn btn-primary" onclick="myFunction()">Filters</button> -->
-<div id="myDIV" style="display: none">
-    <form method="get">
-      <br>
-      {{myFilter.form}}
-      <button class="btn btn-primary" type="submit">Search</button>
-    </form>
-  </div>
+<form action="{% url 'vins' %}" method="get">
+  <input name="vinField" type="text" placeholder="Search a car by VIN...">
+</form>
   <table class="table table-hover">
     <thead>
       <tr>
