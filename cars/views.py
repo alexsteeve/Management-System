@@ -91,10 +91,6 @@ class CarDetailView(View):
         return render(request, 'car_detail.html', context)
 
 def vins(request):
-    # payload = {'apikey' : 'ZrQEPSkKYWxleHN0ZWV2ZUBnbWFpbC5jb20='}
-    # response = requests.get('https://auto.dev/api/vin/ZPBUA1ZL9KLA00848?apikey=ZrQEPSkKYWxleHN0ZWV2ZUBnbWFpbC5jb20=')
-    # response = requests.get('https://auto.dev/api/vin/ZPBUA1ZL9KLA00848', headers={'Authorization': 'Bearer: rQEPSkKYWxleHN0ZWV2ZUBnbWFpbC5jb20='})
-    # response = requests.get('https://auto.dev/api/vin/ZPBUA1ZL9KLA00848', params=payload)
     response = requests.get('https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/4JGAB54EX1A231822?format=json')
     vins = response.json()
 
