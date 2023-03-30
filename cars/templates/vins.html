@@ -7,8 +7,14 @@
     <h1>Vins</h1>
 </div>
 <div class="container mt-5">
-    <p>Year: {{ vins.Results.10.Value }}</p>
-    <p>Make: {{ vins.Results.7.Value }}</p>
-    <p>Model: {{ vins.Results.9.Value }} {{ vins.Results.12.Value }}</p>
+    <p><b>VIN:</b>{{ vins.Results.5.Value }}</p>
+    <p><b>Year:</b> {{ vins.Results.10.Value }}</p>
+    <p><b>Make:</b> {{ vins.Results.7.Value }}</p>
+    <p><b>Model:</b> {{ vins.Results.9.Value }} {{ vins.Results.12.Value }}</p>
+    <p><b>Body Class:</b> {{ vins.Results.23.Value }}</p>
+    <p><b>Doors:</b> {{ vins.Results.24.Value }}</p>
+    <p><b>Drive Type:</b> {{ vins.Results.51.Value }}</p>
+    <p><b>Engine Number of Cylinders:</b> {{ vins.Results.70.Value }}</p>
+    <p><b>Liter:</b> {{ vins.Results.73.Value }}</p>
 </div>
 {% endblock %}
