@@ -93,7 +93,8 @@ class CarDetailView(View):
 def vins(request):
     payload = {'apikey' : 'ZrQEPSkKYWxleHN0ZWV2ZUBnbWFpbC5jb20='}
     # response = requests.get('https://auto.dev/api/vin/ZPBUA1ZL9KLA00848?apikey=ZrQEPSkKYWxleHN0ZWV2ZUBnbWFpbC5jb20=')
-    response = requests.get('https://auto.dev/api/vin/ZPBUA1ZL9KLA00848', params=payload)
+    response = requests.get('https://auto.dev/api/vin/ZPBUA1ZL9KLA00848')
+    # response = requests.get('https://auto.dev/api/vin/ZPBUA1ZL9KLA00848', params=payload)
     vins = response.json()
 
     return render(request, "vins.html", {'vins': vins})
