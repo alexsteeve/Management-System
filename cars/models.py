@@ -1,5 +1,65 @@
 from django.db import models
 
+class Prices(models.Model):
+    TYPE_CHOICES = [
+        ('ac_compressor', 'A/C COMPRESSOR'),
+        ('abs_module', 'ABS MODULE'),
+        ('airbag', 'AIRBAG'),
+        ('alternator', 'ALTERNATOR'),
+        ('battery', 'BATTERY'),
+        ('body_control_module', 'BODY CONTROL MODULE'),
+        ('booster', 'BOOSTER'),
+        ('brake_caliper_front_left', 'BRAKE CALIPER FRONT LEFT'),
+        ('brake_caliper_front_right', 'BRAKE CALIPER FRONT RIGHT'),
+        ('brake_caliper_rear_left', 'BRAKE CALIPER REAR LEFT'),
+        ('brake_caliper_rear_right', 'BRAKE CALIPER REAR RIGHT'),
+        ('catalyst', 'CATALYST'),
+        ('climate_control_module', 'CLIMATE CONTROL MODULE'),
+        ('drive_axle_front_left', 'DRIVE AXLE FRONT LEFT'),
+        ('drive_axle_front_right', 'DRIVE AXLE FRONT RIGHT'),
+        ('drive_axle_rear_left', 'DRIVE AXLE REAR LEFT'),
+        ('drive_axle_rear_right', 'DRIVE AXLE REAR RIGHT'),
+        ('electronic_throttle_body', 'ELECTRONIC THROTTLE BODY'),
+        ('engine', 'ENGINE'),
+        ('engine_control_module', 'ENGINE CONTROL MODULE'),
+        ('eps_column', 'EPS COLUMN'),
+        ('eps_rack', 'EPS RACK'),
+        ('fan_from_radiator', 'FAN FROM RADIATOR'),
+        ('footweel_module', 'FOOTWEEL MODULE'),
+        ('inverter_hybrid_voltage_converter', 'INVERTER / HYBRID VOLTAGE CONVERTER'),
+        ('manual_racks', 'MANUAL RACKS'),
+        ('passenger_inflator', 'PASSENGER INFLATOR'),
+        ('power_booster', 'POWER BOOSTER'),
+        ('power_steering_pump', 'POWER STEERING PUMP'),
+        ('rack_pinion_power', 'RACK & PINION POWER'),
+        ('radiator', 'RADIATOR'),
+        ('radio_audio', 'RADIO / AUDIO'),
+        ('salvage', 'SALVAGE'),
+        ('starter', 'STARTER'),
+        ('tipm', 'TIPM'),
+        ('tires', 'TIRES'),
+        ('transfer_case', 'TRANSFER CASE'),
+        ('transmission', 'TRANSMISSION'),
+        ('transmission_control_module', 'TRANSMISSION CONTROL MODULE'),
+        ('wheels', 'WHEELS'),
+        ('wire', 'WIRE'),
+    ]
+    BUYER_CHOICES = [
+        ('sam', 'SAM'),
+        ('other_rockledge', 'OTHER_ROCKLEDGE'),
+    ]
+    type = models.CharField(max_length=50, choices=TYPE_CHOICES)
+    year_init = models.PositiveSmallIntegerField()
+    year_final = models.PositiveSmallIntegerField()
+    make = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+    engine = models.CharField(max_length=100)
+    driver_type = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    buyer = models.CharField(max_length=50, choices=BUYER_CHOICES)
+    def __str__(self):
+        return self.type
+
 
 class Car(models.Model):
     

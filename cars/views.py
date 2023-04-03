@@ -3,12 +3,24 @@ from django.forms import ModelForm
 from django.views.generic.detail import View
 from django.utils import timezone
 # from .filters import CarFilter
-from .models import Car, Part
+from .models import Car, Part, Prices
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 import requests
 from dotenv import dotenv_values
 import os
+
+class PriceForm(ModelForm):
+    class Meta:
+        model = Prices
+        fields = ['type', 'year_init', 'year_final', 'make', 'model', 'engine', 'driver_type', 'price', 'buyer']
+
+def price_create(request):
+    form = PriceForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+    return render(request, 'price_form.html', {'form': form})
 
 class CarForm(ModelForm):
     class Meta:
