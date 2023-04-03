@@ -75,6 +75,7 @@ class Car(models.Model):
         ('sold', 'Sold'),
         ('yard', 'In Yard'),
         ('remove_engine', 'Remove Engine'),
+        ('dismantled', 'Dismantled')
     ]
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
