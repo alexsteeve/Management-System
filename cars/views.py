@@ -22,6 +22,25 @@ def price_create(request):
         return redirect('index')
     return render(request, 'price_form.html', {'form': form})
 
+def price_list(request):
+    prices = Prices.objects.all()
+    return render(request, 'price_list.html', {'prices': prices})
+
+def price_update(request, id):
+    price = get_object_or_404(Prices, id=id)
+    form = PriceForm(request.POST or None, instance=price)
+    if form.is_valid():
+        form.save()
+        return redirect('prices')
+    return render(request, 'price_form.html', {'form': form})
+
+def price_delete(request, id):
+    price = get_object_or_404(Prices, id=id)
+    if request.method == 'POST':
+        price.delete()
+        return redirect('prices')
+    return render(request, 'price_confirm_delete.html', {'price': price})
+
 class CarForm(ModelForm):
     class Meta:
         model = Car
