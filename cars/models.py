@@ -46,7 +46,7 @@ class Prices(models.Model):
     ]
     BUYER_CHOICES = [
         ('sam', 'SAM'),
-        ('other_rockledge', 'OTHER_ROCKLEDGE'),
+        ('other_jacksonville', 'OTHER_JACKSONVILLE'),
     ]
     type = models.CharField(max_length=50, choices=TYPE_CHOICES)
     year_init = models.PositiveSmallIntegerField()
