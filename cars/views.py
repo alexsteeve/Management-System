@@ -130,6 +130,7 @@ def vins(request):
     
     prices = Prices.objects.all()
     prices = list(prices)
+    # prices.sort(key=type)
     pricesMatched = []
     expected_price = copyMatches(prices , vins, pricesMatched)
 
@@ -148,6 +149,7 @@ def copyMatches(prices , vins, pricesMatched):
     model = (vins["Results"][9]["Value"])
     liter = (vins["Results"][73]["Value"])
     driverType = (vins["Results"][51]["Value"])
+    previous_type = ""
     for i in range(len(prices)):
         copy = True
         if not(prices[i].year_init <= yearVin and prices[i].year_final >= yearVin):
@@ -160,9 +162,10 @@ def copyMatches(prices , vins, pricesMatched):
             copy = False
         if (prices[i].driver_type != driverType and prices[i].driver_type != "ANY"):
             copy = False
-        if (copy):
+        if (copy and previous_type != prices[i].type):
             pricesMatched.append(prices[i])
             expected_price = expected_price + prices[i].price
+            previous_type = prices[i].type
     return expected_price
     # removable = False
     # while (removable == False):
