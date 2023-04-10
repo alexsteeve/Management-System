@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from django.views.generic.detail import View
 from django.utils import timezone
-# from .filters import CarFilter
 from .models import Car, Part, Prices
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 import requests
 from dotenv import dotenv_values
 import os
+import pprint
+import json
 
 class PriceForm(ModelForm):
     class Meta:
@@ -19,11 +20,12 @@ def price_create(request):
     form = PriceForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect('index')
+        return redirect('prices')
     return render(request, 'price_form.html', {'form': form})
 
 def price_list(request):
     prices = Prices.objects.all()
+    print(prices.values())
     return render(request, 'price_list.html', {'prices': prices})
 
 def price_update(request, id):
@@ -125,6 +127,50 @@ def vins(request):
     vinReceived = request.GET.get("vinField")
     response = requests.get('https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/' + vinReceived + '?format=json')
     vins = response.json()
+    
+    prices = Prices.objects.all()
+    prices = list(prices)
+    pricesMatched = []
+    expected_price = copyMatches(prices , vins, pricesMatched)
 
-    return render(request, "vins.html", {'vins': vins})
+    # print(prices.values())
+    context = {'vins': vins}
+    context['prices'] = pricesMatched
+    context['expected_price'] = expected_price
+
+    return render(request, "vins.html", context)
     pass
+
+def copyMatches(prices , vins, pricesMatched):
+    expected_price = 590
+    yearVin = int(vins["Results"][10]["Value"])
+    make = (vins["Results"][7]["Value"])
+    model = (vins["Results"][9]["Value"])
+    liter = (vins["Results"][73]["Value"])
+    driverType = (vins["Results"][51]["Value"])
+    for i in range(len(prices)):
+        copy = True
+        if not(prices[i].year_init <= yearVin and prices[i].year_final >= yearVin):
+            copy = False
+        if (prices[i].make.upper() != make.upper() and prices[i].make != "ANY"):
+            copy = False
+        if (prices[i].model.upper() != model.upper() and prices[i].model != "ANY"):
+            copy = False
+        if (prices[i].engine != liter and prices[i].engine != "ANY"):
+            copy = False
+        if (prices[i].driver_type != driverType and prices[i].driver_type != "ANY"):
+            copy = False
+        if (copy):
+            pricesMatched.append(prices[i])
+            expected_price = expected_price + prices[i].price
+    return expected_price
+    # removable = False
+    # while (removable == False):
+    #     for i in range(len(prices)):
+    #         print(prices[i].year_init)
+    #         print(i)
+    #         if not(prices[i].year_init <= yearVin and prices[i].year_final >= yearVin):
+    #             removable = True
+    #         if (removable):
+    #             print("removing")
+    #             prices.pop(i)

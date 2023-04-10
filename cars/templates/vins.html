@@ -18,9 +18,9 @@
     <p><b>Liter: </b> {{ vins.Results.73.Value }}</p>
 </div>
 
-<h3>Expected Price: <b>US$ 590,00</b></h3>
+<h3>Expected Price: <b>US$ {{expected_price}}</b></h3>
 <div class="containter mt-5">
-    <p><b>Detalhes:</b></p>
+    <p><b>Details:</b></p>
     <p><b>Salvage:</b> US$ 300,00</p>
     <p><b>Catalyst:</b> US$ 100,00</p>
     <p><b>Wires:</b> US$ 64,00</p>
@@ -28,5 +28,8 @@
     <p><b>Tires:</b> US$ 30,00</p>
     <p><b>Battery:</b> US$ 10,00</p>
     <p><b>Radiator:</b> US$ 5,00</p>
+    {% for price in prices %}
+    <p><b>{{price.type}}:</b> US$ {{price.price}}</p>
+    {% endfor %}
 </div>
 {% endblock %}
