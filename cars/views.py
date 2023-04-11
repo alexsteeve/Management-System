@@ -154,7 +154,8 @@ def copyMatches(prices , vins, pricesMatched):
             copy = False
         if (not(str(prices[i].model.upper()) in str(model)) and prices[i].model != "ANY"):
             copy = False
-        if (prices[i].engine != liter and prices[i].engine != "ANY"):
+        # if (prices[i].engine != liter and prices[i].engine != "ANY"):
+        if (not(str(liter) in str(prices[i].engine)) and prices[i].engine != "ANY"):
             copy = False
         if ((not(str(prices[i].driver_type.upper()) in str(driverType)) and prices[i].driver_type != "ANY") and (turbo != "Yes" and prices[i].driver_type != "TURBO")):
             copy = False
