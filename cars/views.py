@@ -144,6 +144,8 @@ def copyMatches(prices , vins, pricesMatched):
     model = (vins["Results"][9]["Value"]).upper()
     liter = (vins["Results"][73]["Value"])
     driverType = (vins["Results"][51]["Value"])
+    if (driverType == "4x2"):
+        driverType = "4WD"
     turbo = (vins["Results"][87]["Value"])
     previous_type = ""
     for i in range(len(prices)):
