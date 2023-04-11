@@ -144,11 +144,8 @@ def copyMatches(prices , vins, pricesMatched):
     model = (vins["Results"][9]["Value"]).upper()
     liter = (vins["Results"][73]["Value"])
     driverType = (vins["Results"][51]["Value"])
+    turbo = (vins["Results"][87]["Value"])
     previous_type = ""
-    if  str(prices[9].driver_type.upper()) in str(driverType):
-        print("yes")
-    else:
-        print("no")
     for i in range(len(prices)):
         copy = True
         if not(prices[i].year_init <= yearVin and prices[i].year_final >= yearVin):
@@ -159,7 +156,7 @@ def copyMatches(prices , vins, pricesMatched):
             copy = False
         if (prices[i].engine != liter and prices[i].engine != "ANY"):
             copy = False
-        if (not(str(prices[i].driver_type.upper()) in str(driverType)) and prices[i].driver_type != "ANY"):
+        if ((not(str(prices[i].driver_type.upper()) in str(driverType)) and prices[i].driver_type != "ANY") and (turbo != "Yes" and prices[i].driver_type != "TURBO")):
             copy = False
         if (copy and previous_type != prices[i].type):
             pricesMatched.append(prices[i])
