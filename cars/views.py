@@ -10,6 +10,7 @@ from dotenv import dotenv_values
 import os
 import pprint
 import json
+import re
 
 class PriceForm(ModelForm):
     class Meta:
@@ -54,10 +55,6 @@ def car_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # myFilter = CarFilter(request.GET, queryset=cars)
-    # cars = myFilter.qs
-
-    # context = {'cars': cars, 'myFilter': myFilter}
     context = {'cars': cars}
 
     return render(request, 'car_list.html', {'page_obj': page_obj})
@@ -130,11 +127,9 @@ def vins(request):
     
     prices = Prices.objects.all()
     prices = list(prices)
-    # prices.sort(key=type)
     pricesMatched = []
     expected_price = copyMatches(prices , vins, pricesMatched)
 
-    # print(prices.values())
     context = {'vins': vins}
     context['prices'] = pricesMatched
     context['expected_price'] = expected_price
@@ -145,35 +140,29 @@ def vins(request):
 def copyMatches(prices , vins, pricesMatched):
     expected_price = 590
     yearVin = int(vins["Results"][10]["Value"])
-    make = (vins["Results"][7]["Value"])
-    model = (vins["Results"][9]["Value"])
+    make = (vins["Results"][7]["Value"]).upper()
+    model = (vins["Results"][9]["Value"]).upper()
     liter = (vins["Results"][73]["Value"])
-    driverType = (vins["Results"][51]["Value"])
+    driverType = (vins["Results"][51]["Value"]).upper()
     previous_type = ""
+    if  str(prices[9].driver_type.upper()) in str(driverType):
+        print("yes")
+    else:
+        print("no")
     for i in range(len(prices)):
         copy = True
         if not(prices[i].year_init <= yearVin and prices[i].year_final >= yearVin):
             copy = False
-        if (prices[i].make.upper() != make.upper() and prices[i].make != "ANY"):
+        if (not(str(prices[i].make.upper()) in str(make)) and prices[i].make != "ANY"):
             copy = False
-        if (prices[i].model.upper() != model.upper() and prices[i].model != "ANY"):
+        if (not(str(prices[i].model.upper()) in str(model)) and prices[i].model != "ANY"):
             copy = False
         if (prices[i].engine != liter and prices[i].engine != "ANY"):
             copy = False
-        if (prices[i].driver_type != driverType and prices[i].driver_type != "ANY"):
+        if (not(str(prices[i].driver_type.upper()) in str(driverType)) and prices[i].driver_type != "ANY"):
             copy = False
         if (copy and previous_type != prices[i].type):
             pricesMatched.append(prices[i])
             expected_price = expected_price + prices[i].price
             previous_type = prices[i].type
     return expected_price
-    # removable = False
-    # while (removable == False):
-    #     for i in range(len(prices)):
-    #         print(prices[i].year_init)
-    #         print(i)
-    #         if not(prices[i].year_init <= yearVin and prices[i].year_final >= yearVin):
-    #             removable = True
-    #         if (removable):
-    #             print("removing")
-    #             prices.pop(i)
