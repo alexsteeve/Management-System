@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container-fluid p-2 bg-primary text-white text-center">
-    <h1>Vins</h1>
+    <h1>Car Value</h1>
 </div>
 <form action="{% url 'vins' %}" method="get">
     <input name="vinField" type="text" placeholder="Search a car by VIN...">
@@ -19,6 +19,7 @@
     <p><b>Drive Type: </b> {{ vins.Results.51.Value }}</p>
     <p><b>Engine Number of Cylinders: </b> {{ vins.Results.70.Value }}</p>
     <p><b>Liter: </b> {{ vins.Results.73.Value }}</p>
+    <p><b>Turbo: </b> {{ vins.Results.87.Value }}</p>
 </div>
 
 <h3>Expected Price: <b>US$ {{expected_price}}</b></h3>
