@@ -143,7 +143,7 @@ def copyMatches(prices , vins, pricesMatched):
     make = (vins["Results"][7]["Value"]).upper()
     model = (vins["Results"][9]["Value"]).upper()
     liter = (vins["Results"][73]["Value"])
-    driverType = (vins["Results"][51]["Value"]).upper()
+    driverType = (vins["Results"][51]["Value"])
     previous_type = ""
     if  str(prices[9].driver_type.upper()) in str(driverType):
         print("yes")
