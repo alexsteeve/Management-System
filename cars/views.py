@@ -121,18 +121,18 @@ class CarDetailView(View):
         return render(request, 'car_detail.html', context)
 
 def vins(request):
-    vinReceived = request.GET.get("vinField")
+    vinReceived = str(request.GET.get("vinField"))
     response = requests.get('https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/' + vinReceived + '?format=json')
     vins = response.json()
     
     prices = Prices.objects.all()
     prices = list(prices)
     pricesMatched = []
-    expected_price = copyMatches(prices , vins, pricesMatched)
-
     context = {'vins': vins}
-    context['prices'] = pricesMatched
-    context['expected_price'] = expected_price
+    if(vins["Results"][0]["Value"] != "N!NE"):
+        expected_price = copyMatches(prices , vins, pricesMatched)
+        context['expected_price'] = expected_price
+        context['prices'] = pricesMatched
 
     return render(request, "vins.html", context)
     pass
@@ -156,7 +156,6 @@ def copyMatches(prices , vins, pricesMatched):
             copy = False
         if (not(str(prices[i].model.upper()) in str(model)) and prices[i].model != "ANY"):
             copy = False
-        # if (prices[i].engine != liter and prices[i].engine != "ANY"):
         if (not(str(liter) in str(prices[i].engine)) and prices[i].engine != "ANY"):
             copy = False
         if ((not(str(prices[i].driver_type.upper()) in str(driverType)) and prices[i].driver_type != "ANY") and (turbo != "Yes" and prices[i].driver_type != "TURBO")):
