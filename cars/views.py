@@ -34,11 +34,16 @@ def loginPage(request):
         context = {}
         return render(request, 'login.html', context)
 
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
 class PriceForm(ModelForm):
     class Meta:
         model = Prices
         fields = ['type', 'year_init', 'year_final', 'make', 'model', 'engine', 'driver_type', 'price', 'buyer']
 
+@login_required(login_url='login')
 def price_create(request):
     form = PriceForm(request.POST or None)
     if form.is_valid():
@@ -46,11 +51,13 @@ def price_create(request):
         return redirect('prices')
     return render(request, 'price_form.html', {'form': form})
 
+@login_required(login_url='login')
 def price_list(request):
     prices = Prices.objects.all()
     print(prices.values())
     return render(request, 'price_list.html', {'prices': prices})
 
+@login_required(login_url='login')
 def price_update(request, id):
     price = get_object_or_404(Prices, id=id)
     form = PriceForm(request.POST or None, instance=price)
@@ -59,6 +66,7 @@ def price_update(request, id):
         return redirect('prices')
     return render(request, 'price_form.html', {'form': form})
 
+@login_required(login_url='login')
 def price_delete(request, id):
     price = get_object_or_404(Prices, id=id)
     if request.method == 'POST':
@@ -71,6 +79,7 @@ class CarForm(ModelForm):
         model = Car
         fields = ['date', 'year', 'make', 'model', 'LOT', 'VIN', 'site', 'status', 'bid', 'buyer_fee', 'fixed_fee', 'storage_fee', 'late_payment_fee', 'others_fees', 'transport', 'dismantle', 'weight', 'picture']
 
+@login_required(login_url='login')
 def car_list(request):
     cars = Car.objects.all()
     paginator = Paginator(cars, 10)
@@ -81,6 +90,7 @@ def car_list(request):
 
     return render(request, 'car_list.html', {'page_obj': page_obj})
 
+@login_required(login_url='login')
 def car_create(request):
     form = CarForm(request.POST or None)
     if form.is_valid():
@@ -88,6 +98,7 @@ def car_create(request):
         return redirect('index')
     return render(request, 'car_form.html', {'form': form})
 
+@login_required(login_url='login')
 def car_update(request, id):
     car = get_object_or_404(Car, id=id)
     form = CarForm(request.POST or None, instance=car)
@@ -96,6 +107,7 @@ def car_update(request, id):
         return redirect('index')
     return render(request, 'car_form.html', {'form': form})
 
+@login_required(login_url='login')
 def car_delete(request, id):
     car = get_object_or_404(Car, id=id)
     if request.method == 'POST':
@@ -108,10 +120,12 @@ class PartForm(ModelForm):
         model = Part
         fields = ['VIN', 'status', 'type', 'max_value', 'value_paid']
 
+@login_required(login_url='login')
 def part_list(request):
     parts = Part.objects.all()
     return render(request, 'part_list.html', {'parts': parts})
 
+@login_required(login_url='login')
 def part_create(request):
     form = PartForm(request.POST or None)
     if form.is_valid():
@@ -119,6 +133,7 @@ def part_create(request):
         return redirect('parts')
     return render(request, 'part_form.html', {'form': form})
 
+@login_required(login_url='login')
 def part_update(request, id):
     part = get_object_or_404(Part, id=id)
     form = PartForm(request.POST or None, instance=part)
@@ -127,6 +142,7 @@ def part_update(request, id):
         return redirect('parts')
     return render(request, 'part_form.html', {'form': form})
 
+@login_required(login_url='login')
 def part_delete(request, id):
     part = get_object_or_404(Part, id=id)
     if request.method == 'POST':
@@ -142,6 +158,7 @@ class CarDetailView(View):
         context['part'] = Part.objects.filter(VIN=self.kwargs['VIN'])
         return render(request, 'car_detail.html', context)
 
+@login_required(login_url='login')
 def vins(request):
     vinReceived = str(request.GET.get("vinField"))
     response = requests.get('https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/' + vinReceived + '?format=json')

@@ -20,4 +20,5 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('jpeg/favicon.ico'))),
     path('vin', views.vins, name='vins'),
     path('login/', views.loginPage, name="login"),
+    path('logout/', views.logoutUser, name="logout"),
 ]
