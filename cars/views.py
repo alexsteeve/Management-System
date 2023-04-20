@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from django.views.generic.detail import View
 from django.utils import timezone
-from .models import Car, Part, Prices
+from .models import *
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 import requests
@@ -11,6 +11,28 @@ import os
 import pprint
 import json
 import re
+from django.forms import inlineformset_factory
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
+
+def loginPage(request):
+    # if request.user.is_authenticated:
+    #     return redirect('index')
+    # else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+            else:
+                messages.info(request, 'Username or password is incorrect')
+        context = {}
+        return render(request, 'login.html', context)
 
 class PriceForm(ModelForm):
     class Meta:
