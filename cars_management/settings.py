@@ -117,6 +117,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
@@ -132,4 +133,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = ['alexsteeve.pythonanywhere.com', '127.0.0.1', 'auto.dev']
 
-# STATIC_ROOT = "/home/alexsteeve/Management-System/static"
+STATIC_ROOT = "/home/Management-System/static"
