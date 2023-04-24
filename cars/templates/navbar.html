@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
   .hello-msg{
     font-size: 18px;
     color: #fff;
@@ -29,4 +29,31 @@
     </div>
     <span class="hello-msg">Hello, {{request.user}}</span>
     <span class="hello-msg"><a href="{% url 'logout' %}">Logout</a></span>
-  </nav>
+  </nav> -->
+
+  <div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent">
+      <div class="bg-primary p-4">
+        <ul class="navbar-nav text-white" style="text-align: right;">
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Cars</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'parts' %}">Parts</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'prices' %}">Pricing</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'vins' %}">Vin Research</a>
+          </li>
+        </ul>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-primary">
+      <a class="text-white" href="{% url 'index' %}">Car Management</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+  </div>
