@@ -36,11 +36,8 @@
         <th>{{ part.max_value }}</th>
         <td>{{ part.value_paid }}</td>
         <td>
-          <a href="{% url 'part_update' part.id %}">Edit</a>
-          <form action="{% url 'part_delete' part.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Delete</button>
-          </form>
+          <a class="btn btn-sm btn-info" href="{%url 'part_update' part.id%}">Edit</a>
+          <a class="btn btn-sm btn-warning" href="{%url 'part_delete' part.id%}">Delete</a>
         </td>
       </tr>
       {% empty %}

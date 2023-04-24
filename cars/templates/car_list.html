@@ -4,9 +4,6 @@
 
 {% block content %}
 <h1>Car List</h1>
-<form action="{% url 'vins' %}" method="get">
-  <input name="vinField" type="text" placeholder="Search a car by VIN...">
-</form>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -17,15 +14,6 @@
         <th scope="col">Model</th>
         <th scope="col">Date</th>
         <th scope="col">Status</th>
-        <th scope="col">Bid</th>
-        <th scope="col">Buyer Fee</th>
-        <th scope="col">Fixed Fee</th>
-        <th scope="col">Storage Fee</th>
-        <th scope="col">Late Payment Fee</th>
-        <th scope="col">Others Fees</th>
-        <th scope="col">Transport</th>
-        <th scope="col">Dismantle</th>
-        <th scope="col">Weight</th>
         <th scope="col">LOT</th>
         <th scope="col">Site</th>
         <th scope="col">Action</th>
@@ -35,30 +23,17 @@
       {% for car in page_obj %}
       <tr class="table-primary">
         <!-- <th>{{ car.VIN }}</th> -->
-        <th>{{ car.id }}</th>
-        <th><a class="nav_link" href="{% url 'car_detail' car.pk %}">{{ car.VIN }}</a></th>
+        <th><a class="nav_link" href="{% url 'car_detail' car.pk %}">{{ car.id }}</a></th>
+        <th>{{ car.VIN }}</th>
         <th>{{ car.year }}</th>
         <th>{{ car.make }}</th>
         <th>{{ car.model }}</th>
         <td>{{ car.date }}</td>
         <td>{{ car.status }}</td>
-        <td>{{ car.bid }}</td>
-        <td>{{ car.buyer_fee }}</td>
-        <td>{{ car.fixed_fee }}</td>
-        <td>{{ car.storage_fee }}</td>
-        <td>{{ car.late_payment_fee }}</td>
-        <td>{{ car.others_fees }}</td>
-        <td>{{ car.transport }}</td>
-        <td>{{ car.dismantle }}</td>
-        <td>{{ car.weight }}</td>
         <td>{{ car.LOT }}</td>
         <td><a href="{{ car.site }}" target="_blank" rel="noopener noreferrer">Link to the auction</a></td>
         <td>
-          <a href="{% url 'car_update' car.id %}">Edit</a>
-          <form action="{% url 'car_delete' car.id %}" method="post">
-            {% csrf_token %}
-            <!-- <button type="submit">Delete</button> -->
-          </form>
+          <a class="btn btn-sm btn-info" href="{%url 'car_update' car.id%}">Edit</a>
         </td>
       </tr>
       {% empty %}
