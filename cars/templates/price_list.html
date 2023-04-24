@@ -31,11 +31,10 @@
         <th>{{ price.price }}</th>
         <th>{{ price.buyer }}</th>
         <td>
-          <a href="{% url 'price_update' price.id %}">Edit</a>
-          <form action="{% url 'price_delete' price.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Delete</button>
-          </form>
+          <a class="btn btn-sm btn-info" href="{%url 'price_update' price.id%}">Edit</a>
+        </td>
+        <td>
+          <a class="btn btn-sm btn-warning" href="{%url 'price_delete' price.id%}">Delete</a>
         </td>
       </tr>
       {% empty %}

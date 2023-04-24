@@ -75,10 +75,8 @@ def price_update(request, id):
 @login_required(login_url='login')
 def price_delete(request, id):
     price = get_object_or_404(Prices, id=id)
-    if request.method == 'POST':
-        price.delete()
-        return redirect('prices')
-    return render(request, 'price_confirm_delete.html', {'price': price})
+    price.delete()
+    return redirect('prices')
 
 
 class CarForm(ModelForm):
@@ -162,10 +160,8 @@ def part_update(request, id):
 @login_required(login_url='login')
 def part_delete(request, id):
     part = get_object_or_404(Part, id=id)
-    if request.method == 'POST':
-        part.delete()
-        return redirect('parts')
-    return render(request, 'part_confirm_delete.html', {'part': part})
+    part.delete()
+    return redirect('parts')
 
 
 class CarDetailView(View):
